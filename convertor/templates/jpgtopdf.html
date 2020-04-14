@@ -39,7 +39,7 @@
 </div>
 
 <div>
-    <form method="post" action="./fileuploads" enctype="multipart/form-data">
+    <form method="post" action="./jpgtopdf" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             <h5 style="text-align: center">Click the icon below to upload files</h5>
@@ -58,12 +58,25 @@
         <div>
             <h5 id="filecount" style="text-align: center"></h5>
         </div>
-        <button id="uploadbutton" style="margin: auto;display: block; width:100px;text-align:center" type="button"
-                class="btn btn-primary " disabled>Upload
-        </button>
-    </form>
+        <div class="buttons">
+            <button id="uploadbutton" type="submit"
+                    class="btn btn-primary " disabled>Upload
+            </button>
+            <a id="removequeue" href="./jpgtopdf" type="button"
+                    class="btn btn-danger disabled" >Remove queue
+            </a>
+        </div>
+        </br>
+        </br>
 
+    </form>
 </div>
+</br>
+{% if url %}
+    <h5 style="text-align: center">Your file is ready for download.</h5>
+    </br>
+    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href={% static 'uploaded_files/jpg2pdf/'|add:url|add:'/sample.pdf' %} download>Download</a>
+{% endif %}
 
 <div class="container quote-imgs-thumbs quote-imgs-thumbs--hidden" id="result" aria-live="polite"></div>
 

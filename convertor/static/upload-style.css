@@ -9,3 +9,10 @@
     left: 50%;
     margin-left: -50px;
 }
+
+.buttons{
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+}

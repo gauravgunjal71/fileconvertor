@@ -29,12 +29,14 @@ function handleFileSelect(event) {
         if(!!files){
             output.classList.remove('quote-imgs-thumbs--hidden');
             document.getElementById('uploadbutton').disabled = false;
+            document.getElementById('removequeue').classList.remove('disabled')
         }
 
         for (var i=0; i<files.length;i++){
             var img = document.createElement('img');
             img.src = URL.createObjectURL(event.target.files[i]);
             img.classList.add('img-preview-thumb');
+            img.classList.add('remove');
             output.appendChild(img)
         }
     } else {
