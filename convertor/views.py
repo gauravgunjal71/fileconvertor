@@ -29,7 +29,10 @@ def jpgToPdf(request):
         for file in files.getlist('files'):
             files_list.append(file)
 
+        a4inpt = (img2pdf.mm_to_pt(210), img2pdf.mm_to_pt(297))
+        layout_fun = img2pdf.get_layout_fun(a4inpt)
         with open(path_to_upload+"/sample.pdf", "wb") as f:
-            f.write(img2pdf.convert(files_list))
+            f.write(img2pdf.convert(files_list, layout_fun=layout_fun))
+        os.rename(path_to_upload+"/sample.pdf",path_to_upload+"/sample.txt")
         return render(request, 'jpgtopdf.html', {'url': str(res)})
     return render(request, 'jpgtopdf.html')

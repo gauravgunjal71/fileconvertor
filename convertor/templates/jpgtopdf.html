@@ -34,7 +34,7 @@
 
 <div>
     <br/>
-    <H1 style="text-align: center; font-family: 'Pacifico'; color: black">Convert your images into a pdf</H1>
+    <H1 style="text-align: center; font-family: 'Comic Sans MS'; color: black">Convert your images into a pdf</H1>
     <br/>
 </div>
 
@@ -49,7 +49,7 @@
                 <img src="{% static 'icons/upload.png' %}"/>
             </label>
 
-            <input id="files" type="file" name="files" multiple hidden/>
+            <input id="files" type="file" name="files" accept="image/jpeg" multiple hidden/>
         </div>
         </br>
         </br>
@@ -75,7 +75,7 @@
 {% if url %}
     <h5 style="text-align: center">Your file is ready for download.</h5>
     </br>
-    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href={% static 'uploaded_files/jpg2pdf/'|add:url|add:'/sample.pdf' %} download>Download</a>
+    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href={% static 'uploaded_files/jpg2pdf/'|add:url|add:'/sample.txt' %} download="output.pdf">Download</a>
 {% endif %}
 
 <div class="container quote-imgs-thumbs quote-imgs-thumbs--hidden" id="result" aria-live="polite"></div>
