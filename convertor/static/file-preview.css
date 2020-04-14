@@ -1,0 +1,50 @@
+/*input[type="file"] {*/
+/*  display: block;*/
+/*}*/
+/*.imgThumb {*/
+/*  max-height: 75px;*/
+/*  border: 2px solid;*/
+/*  padding: 1px;*/
+/*  cursor: pointer;*/
+/*  display: inline-block;*/
+/*}*/
+/*.pip {*/
+/*  display: inline-block;*/
+/*  margin: 10px 10px 0 0;*/
+/*}*/
+/*.remove {*/
+/*  display: block;*/
+/*  background: #444;*/
+/*  border: 1px solid black;*/
+/*  color: white;*/
+/*  text-align: center;*/
+/*  cursor: pointer;*/
+/*}*/
+/*.remove:hover {*/
+/*  background: white;*/
+/*  color: black;*/
+/*}*/
+
+
+.quote-imgs-thumbs {
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin: 1.5rem 0;
+  padding: 0.75rem;
+  position: absolute;
+  left: 17%;
+}
+.quote-imgs-thumbs--hidden {
+  display: none;
+}
+.img-preview-thumb {
+  background: #fff;
+  border: 1px solid #777;
+  border-radius: 0.25rem;
+  box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+  margin-right: 1rem;
+  max-width: 140px;
+  padding: 0.25rem;
+  max-height: 100px;
+}

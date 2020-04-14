@@ -1,0 +1,11 @@
+.image-upload > input {
+    display: none;
+}
+
+.image-upload img {
+    width: 100px;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+}
