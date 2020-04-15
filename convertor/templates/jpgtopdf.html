@@ -75,7 +75,7 @@
 {% if url %}
     <h5 style="text-align: center">Your file is ready for download.</h5>
     </br>
-    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href={% static 'uploaded_files/jpg2pdf/'|add:url|add:'/sample.txt' %} download="output.pdf">Download</a>
+    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href="../static/uploaded_files/jpg2pdf/{{ url }}/sample.txt" download="output.pdf">Download</a>
 {% endif %}
 
 <div class="container quote-imgs-thumbs quote-imgs-thumbs--hidden" id="result" aria-live="polite"></div>
