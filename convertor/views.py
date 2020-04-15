@@ -5,6 +5,8 @@ import pandas as pd
 import string
 import random
 import os
+from pdf2image import convert_from_path, convert_from_bytes
+from zipfile import ZipFile
 
 # Create your views here.
 def home(request):
@@ -36,3 +38,35 @@ def jpgToPdf(request):
         os.rename(path_to_upload+"/sample.pdf",path_to_upload+"/sample.txt")
         return render(request, 'jpgtopdf.html', {'url': str(res)})
     return render(request, 'jpgtopdf.html')
+
+def pdftojpg(request):
+    #pdf2image
+
+    if request.method == "POST":
+        # creating random folder name for each user
+        res = ''.join(random.choice(string.ascii_lowercase) for x in range(10))
+        path_to_upload = os.path.join('./convertor/static/uploaded_files/pdf2jpg', str(res))
+        os.makedirs(path_to_upload)
+        files = request.FILES
+        print('hello')
+        for file in files.getlist('files'):
+            print('hello')
+            with open(path_to_upload+'/sample.pdf', 'wb+') as f:
+                for chunk in file.chunks():
+                    f.write(chunk)
+
+        images = convert_from_path(path_to_upload + '/sample.pdf', 500)
+
+        print('hello')
+        zipObj = ZipFile(path_to_upload+'/sample.zip', 'w')
+
+        for image in images:
+            image.save("/page%d.jpg" % (images.index(image)), "JPEG")
+            zipObj.write("/page%d.jpg" % (images.index(image)))
+            os.remove("/page%d.jpg" % (images.index(image)))
+
+        zipObj.close()
+        os.remove(path_to_upload + "/sample.pdf")
+        os.rename(path_to_upload + "/sample.zip", path_to_upload + "/sample.txt")
+        return render(request, 'pdftojpg.html', {'url': str(res)})
+    return render(request, 'pdftojpg.html')

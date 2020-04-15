@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'font.css' %}">
     <link rel="stylesheet" href="{% static 'file-preview.css' %}">
 
-    <title>JPG to PDF</title>
+    <title>PDF to JPG</title>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-primary">
@@ -27,7 +27,6 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="./jpgtopdf">JPG to PDF</a>
                 <a class="nav-item nav-link active" href="./pdftojpg">PDF to JPG</a>
-
             </div>
         </div>
     </nav>
@@ -35,12 +34,12 @@
 
 <div>
     <br/>
-    <H1 style="text-align: center; font-family: 'Comic Sans MS'; color: black">Convert your images into a pdf</H1>
+    <H1 style="text-align: center; font-family: 'Comic Sans MS'; color: black">Convert your pdf into images</H1>
     <br/>
 </div>
 
 <div>
-    <form method="post" action="./jpgtopdf" enctype="multipart/form-data">
+    <form method="post" action="./pdftojpg" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             <h5 style="text-align: center">Click the icon below to upload files</h5>
@@ -50,21 +49,21 @@
                 <img src="{% static 'icons/upload.png' %}"/>
             </label>
 
-            <input id="files" type="file" name="files" accept="image/jpeg" multiple hidden/>
+            <input id="files" type="file" name="files" accept="application/pdf" hidden/>
         </div>
         </br>
         </br>
         </br>
         </br>
         <div>
-            <h5 id="filecount" style="text-align: center"></h5>
+            <h5 id="filename" style="text-align: center"></h5>
         </div>
         <div class="buttons">
             <button id="uploadbutton" type="submit"
                     class="btn btn-primary " disabled>Upload
             </button>
-            <a id="removequeue" href="./jpgtopdf" type="button"
-                    class="btn btn-danger disabled" >Remove queue
+            <a id="removequeue" href="./pdftojpg" type="button"
+                    class="btn btn-danger disabled" >Remove file
             </a>
         </div>
         </br>
@@ -76,11 +75,8 @@
 {% if url %}
     <h5 style="text-align: center">Your file is ready for download.</h5>
     </br>
-    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href="../static/uploaded_files/jpg2pdf/{{ url }}/sample.txt" download="output.pdf">Download</a>
+    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href="../static/uploaded_files/pdf2jpg/{{ url }}/sample.txt" download="output.zip">Download</a>
 {% endif %}
-
-<div class="container quote-imgs-thumbs quote-imgs-thumbs--hidden" id="result" aria-live="polite"></div>
-
 
 
 <!-- Optional JavaScript -->
