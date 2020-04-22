@@ -1,8 +1,7 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,15 +9,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'upload-style.css' %}">
+    <link rel="stylesheet" href="{% static 'font.css' %}">
+    <link rel="stylesheet" href="{% static 'file-preview.css' %}">
 
-    <link rel="stylesheet" href="{% static 'index-content.css' %}">
-
-    <title>File Convertor</title>
+    <title>PDF Table extraction</title>
 </head>
-<body>
-<div class="container">
-    <iframe src="./pdf_view" width="500px" height="500px"></iframe>
-</div>
 <nav class="navbar navbar-dark bg-primary">
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/">File Conversion</a>
@@ -31,7 +27,6 @@
                 <a class="nav-item nav-link active" href="./jpgtopdf">JPG to PDF</a>
                 <a class="nav-item nav-link active" href="./pdftojpg">PDF to JPG</a>
                 <a class="nav-item nav-link active" href="./pdftableextraction">PDF Tables</a>
-
             </div>
         </div>
     </nav>
@@ -39,46 +34,67 @@
 
 <div>
     <br/>
-    <H1 style="text-align: center; font-family: 'Comic Sans MS'; color: black">Welcome to file conversion app.</H1>
+    <H1 style="text-align: center; font-family: 'Comic Sans MS'; color: black">Extract tables from your pdf</H1>
     <br/>
-    <H2 style="text-align: center; font-family: 'Comic Sans MS'; color: black">Please select any option from
-        following.</H2>
 </div>
 
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 text-center" style="opacity: 1;" onclick="location.href='./jpgtopdf'">
-            <div class="content-box" >
-                <img title="JPG to PDF" class="finbyz-icon img-responsive"
-                     src="{% static 'icons/pdf.png' %}">
-                <h4 style="margin-top: 5px" class="content-box-title">JPG to PDF</h4>
-                <p class="content-box-sub">Convert your jpg images to pdf.</p>
-            </div>
+<div>
+    <form method="post" action="./pdftableextraction" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <h5 style="text-align: center">Click the icon below to upload files</h5>
         </div>
-        <div class="col-md-4" style="opacity: 1;" onclick="location.href='./pdftojpg'">
-            <div class="content-box text-center">
-                <img title="PDF to JPG" class="finbyz-icon img-responsive"
-                     src="{% static 'icons/jpg.png' %}">
-                <h4 style="margin-top: 5px" class="content-box-title">PDF to JPG</h4>
-                <p class="content-box-sub">Extract your jpg images from a pdf file./p>
-            </div>
-        </div>
-        <div class="col-md-4" style="opacity: 1;">
-            <div class="content-box text-center">
-                <img title="PDF to DOCX" class="finbyz-icon img-responsive"
-                     src="{% static 'icons/docx.png' %}">
-                <h4 style="margin-top: 5px" class="content-box-title">PDF to DOCX</h4>
-                <p class="content-box-sub">Convert your pdf document to docx format</p>
-            </div>
-        </div>
+        <div class="image-upload">
+            <label for="files">
+                <img src="{% static 'icons/upload.png' %}"/>
+            </label>
 
-    </div>
+            <input id="files" type="file" name="files" accept="application/pdf" hidden/>
+        </div>
+        </br>
+        </br>
+        </br>
+        </br>
+        <div>
+            <h5 id="filename" style="text-align: center"></h5>
+        </div>
+        <div class="buttons">
+            <button id="uploadbutton" type="submit"
+                    class="btn btn-primary " disabled>Upload
+            </button>
+            <a id="removequeue" href="./pdftableextraction" type="button"
+               class="btn btn-danger disabled">Remove file
+            </a>
+        </div>
+        </br>
+        </br>
+
+    </form>
 </div>
+</br>
+
+{% if error %}
+    <h2 style="text-align: center">{{ error }}</h2>
+{% endif %}
+
+{% if tables_extracted %}
+    {% for table in tables_extracted %}
+        {{ table | safe }}
+        </br>
+        </br>
+    {% endfor %}
+{% endif %}
+
+{#{% if url %}#}
+{#    <h5 style="text-align: center">Your file is ready for download.</h5>#}
+{#    </br>#}
+{#    <a style="margin:0 auto;display: block; width: 100px" type="button" class="btn btn-primary" href="../static/uploaded_files/pdf2jpg/{{ url }}/sample.txt" download="output.zip">Download</a>#}
+{#{% endif %}#}
 
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'file-upload.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
