@@ -9,7 +9,7 @@
 # D:\Development\DJango\File convertor\fileconversion\fileconversion\urls.py: 17
 # D:\Development\DJango\File convertor\fileconversion\fileconversion\wsgi.py: 12
 # D:\Development\DJango\File convertor\fileconversion\manage.py: 10
-Django == 2.2.13
+Django == 2.2.24
 
 # D:\Development\DJango\File convertor\fileconversion\convertor\views.py: 3
 img2pdf == 0.3.4
